@@ -29,8 +29,6 @@ class HttpRequest
 
 
 
-
-
     /**
      * HttpRequest constructor.
      * constructor is protected because singleton pattern
