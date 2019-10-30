@@ -1,0 +1,18 @@
+{
+    "name": "gionnicammello/httprequest",
+    "description": "A test to create an http request class utility",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Gianluca Di Francisca",
+            "email": "g.difrancisca@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "gionnicammello\\Httprequest\\": "src"
+        }
+    }
+}
