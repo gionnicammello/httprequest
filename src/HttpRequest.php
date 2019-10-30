@@ -46,7 +46,6 @@ class HttpRequest
      */
     protected function __construct(array & $server, array & $get, array & $post, array & $session)
     {
-        $this->clearFlash();
         $this->get=&$get;
         $this->post=&$post;
         $this->session=&$session;
