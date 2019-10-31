@@ -226,7 +226,7 @@ class HttpRequest
      * clear flash data stored in session
      * Unset the Flash on the SESSION global variable
      */
-    protected function clearFlash()
+    public function clearFlash()
     {
         unset($this->session[SELF::FLASH_NAME]);
     }
@@ -242,6 +242,7 @@ class HttpRequest
     {
         unset($this->session);
     }
+
 
 
 
