@@ -1,6 +1,6 @@
 <?php
 
-namespace app\components\dev_httprequest\tests;
+
 use gionnicammello\Httprequest\HttpRequest;
 use PHPUnit\Framework\TestCase;
 
