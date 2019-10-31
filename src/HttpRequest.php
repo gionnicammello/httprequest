@@ -10,7 +10,6 @@ namespace gionnicammello\Httprequest;
  * It add the addFLash() utility to pass a value to the next page.
  * Flash variable are keept alive only for 1 more request.
  * Class follow singleton pattern to be instantiate only 1 time per request
- * To use SESSION/Flash utility session_start() mus be called before use this class
  * @package gionnicammello\Httprequest
  */
 class HttpRequest
@@ -32,22 +31,21 @@ class HttpRequest
     /**
      * HttpRequest constructor.
      * constructor is protected because singleton pattern
-     * use HttpRequest::create($args) to instantiate
+     * use HttpRequest::create() to instantiate
      * Global variable are passed by reference
-     * Global variable are passed by argument for better testability.
-     * This class will be callen only on bootstrap anyway
-     * To use SESSION/Flash utility session_start() mus be called before use this class
-     * @param array $server $_SERVER global variable
-     * @param array $get $_GET global variable
-     * @param array $post $_POST global variable
-     * @param array $session $_SESSION global variable
      */
-    protected function __construct(array & $server, array & $get, array & $post, array & $session)
+    protected function __construct()
     {
-        $this->get=&$get;
-        $this->post=&$post;
-        $this->session=&$session;
-        $this->server=&$server;
+        //session_start();
+        if ( !defined('STDIN') ){ //Start session if not CLI for testing purpose with PHPunit
+            if (session_status() == PHP_SESSION_NONE) { //Starting session if not already started
+                session_start();
+            }
+        }
+        $this->get=&$_GET;
+        $this->post=&$_POST;
+        $this->session=&$_SESSION;
+        $this->server=&$_SERVER;
         $this->flash=isset($this->session[SELF::FLASH_NAME])?$this->session[SELF::FLASH_NAME]:null;
         $this->clearFlash(); //remove flash from session
     }
@@ -60,19 +58,12 @@ class HttpRequest
     /**
      * Instantiate HttpRequest object
      * Global variable are passed by reference
-     * Global variable are passed by argument for better testability.
-     * This class will be callen only on bootstrap anyway
-     * To use SESSION/Flash utility session_start() mus be called before use this class
-     * @param array $server $_SERVER global variable
-     * @param array $get $_GET global variable
-     * @param array $post $_POST global variable
-     * @param array $session $_SESSION global variable
      * @return HttpRequest
      */
-    public static function create(array & $server,array & $get,array & $post,array & $session)
+    public static function create()
     {
         if(SELF::$instance===null){
-            SELF::$instance=new SELF($server,$get,$post,$session);
+            SELF::$instance=new SELF();
         }
         return SELF::$instance;
     }

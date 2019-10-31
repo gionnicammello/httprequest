@@ -26,15 +26,9 @@ class testHttpRequest extends TestCase
 
     protected function createHttpRequest()
     {
-        return \gionnicammello\Httprequest\HttpRequest::create($_SERVER,$_GET,$_POST,$_SESSION);
+        return \gionnicammello\Httprequest\HttpRequest::create();
     }
 
-
-    public function testPhpUnitIsWorking()
-    {
-        $this->assertEmpty(array());
-        $this->assertEquals(1,1);
-    }
 
 
     public function testSetUpIsWorking()
